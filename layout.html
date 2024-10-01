@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height:100vh;
+            background-color: #ffffff;
+            color: #000000; /* Teks hitam */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark {
+            background-color: black; /* Warna gelap */
+            color: #ffffff; /* Teks putih */
+        }
+        .container {
+            display: flex;
+        }
+        nav {
+            background-color: deepskyblue;
+            width: 80px;
+            height: 100vh;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 5px 0;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+        main {
+            flex-grow: 1;
+            padding: 15px;
+        }
+        header {
+            background-color:dodgerblue;
+            color: white;
+           padding:0.1px;
+             height:30px;
+            text-align: right;
+            
+        }
+        .content {
+            display: none;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+         .gallery img {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+        }
+        .form-control {
+            margin-bottom: 15px;
+        }
+        .form-control label {
+            display: block;
+        }
+        .form-control input, .form-control textarea {
+            width: 50%;
+            padding: 8px;
+            border:1px solid #333;
+            color:black;
+        }
+        .search-bar {
+            margin-bottom: 0.1px;
+        }
+        .search-bar input {
+            width: 20%;
+            padding: 3px;
+            height:18px;
+            border-radius:5px;
+            border:2px solid #333;
+            font-size: 16px;
+        }
+        
+ button{
+    color: #fff;
+    text-decoration: none;
+    background-color: #f0094a;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 6px 18px;
+    border-radius: 5px;
+    border:none;
+}
+        
+        .map {
+            width: 100%;
+            height: 400px;
+        }
+/* Toggle switch */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .theme-toggle input {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            -webkit-appearance: none;
+            background: #ccc;
+            outline: none;
+            border-radius: 25px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .theme-toggle input:checked {
+            background: #333;
+        }
+        .theme-toggle input:before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: white;
+            top: 1.5px;
+            left: 2px;
+            transition: 0.3s;
+        }
+        .theme-toggle input:checked:before {
+            transform: translateX(25px);
+        }
+
+    </style>
+    <script>
+        function showContent(id) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function filterContent() {
+            const query = document.querySelector('.search-bar input').value.toLowerCase();
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                const title = content.querySelector('h2')?.textContent.toLowerCase();
+                if (title && title.includes(query)) {
+                    content.style.display = 'block';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+        }
+       // Mengubah tema saat toggle switch diaktifkan/dimatikan
+        window.onload = function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('change', function() {
+                toggleTheme();
+            });
+        };
+    </script>
+</head>
+<body>
+    <header>
+   <div class="search-bar">
+                <input type="text" placeholder="Cari..." oninput="" />
+                 <button onclick="filterContent()">&#128269</button><h2>
+            </div>
+    </header>
+    <div class="container">
+        <nav>
+            <ul>
+<div class="theme-toggle">
+            <input type="checkbox" id="theme-toggle">
+        </div>
+                <li><a href="#" onclick="showContent('home')"><span style='font-size:26px;'>&#127968</span></a></li>
+                <li><a href="#" onclick="showContent('about')">Tentang</a></li>
+                <li><a href="#" onclick="showContent('services')">Layanan</a></li>
+                <li><a href="#" onclick="showContent('alamat')">Alamat</a></li>
+                <li><a href="#" onclick="showContent('gallery')">Gallery</a></li>
+                <li><a href="#" onclick="showContent('blog')">Blog</a></li>
+               <li><a href="#" onclick="showContent('contact')"><span style='font-size:26px;'>&#128233</span></a></li>
+            </ul>
+        </nav>
+        <main>
+           
+            <section id="home" class="content" style="display: block;">
+                <h4>Software Develoment<a href="https://id.shp.ee/KQsTJSJ"><img src="gintama.jpeg"align="right"style="width:60px;height:60px;border-radius:50%;border:2px solid #333;"></a></h4>
+                <p>Aplikasi Destop,Aplikasi Android,Website,Web App </p>
+               <h4>Aplikasi Editor</h4> 
+<img src="vs.png"align="left"style="width:50px;height:50px;border-radius:50%;border:2px solid #333;">
+<img src="sublim.png"align="left"style="width:50px;height:50px;border-radius:50%;border:2px solid #333;">
+<img src="Notepad.jpg"align="left"style="width:50px;height:50px;border-radius:50%;border:2px solid #333;">
+<img src="net.png"align="left"style="width:50px;height:50px;border-radius:50%;border:2px solid #333;"><br><br><br>
+<h4>Template</h4>
+<a href="https://codepen.io/IL345"><img src="codepen.png"align="left"style="width:50px;height:50px;border-radius:50%;border:2px solid #333;"></a>
+<a href="https://jsfiddle.net/"><img src="JS.png"align="left"style="width:50px;height:50px;border-radius:50%;border:2px solid #333;"></a>
+            </section>
+            <section id="about" class="content">
+<h4>About Me</h4>
+ <img src="loid.jpg"align="center"style="width:140px;height:140px;border-radius:10px;">
+               
+ <p>Saya seorang pengembang front-end.Saya telah mendedikasikan diri saya untuk berkreasi situs web yang menarik secara visual dan ramah pengguna.<br>Saya selalu terbuka untuk menggunakan keahlian baru dan saya percaya pada kekuatan kolaborasi,<br> Bekerja sama dengan desainer dan pengembang back-end untuk memberikan solusi yang kohesif dan efektif.</p>
+            </section>
+            <section id="services" class="content">
+ <img src="pelayanan.png"align="center"style="width:300px;height:200px;border-radius:10px;">
+                <h2>Layanan</h2>
+<details>
+  <summary>Klik</summary>
+                            <p><ul>
+                            <li>Membuat Website</li>
+                            <li>Mendesain Website/Foto</li>
+                            <li>Web Developer</li></p>
+
+</details>
+            </section>
+            <section id="alamat" class="content">
+                <div class="map">
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15861.084240083806!2d107.23095864057538!3d-6.358951335875109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699c2daafce231%3A0x3481ab3160f6a28b!2sPT%20Inoac%20Polytechno%20Indonesia%20Plant!5e0!3m2!1sid!2sid!4v1727400952300!5m2!1sid!2sid" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d64615.940067738346!2d108.0174426!3d-6.8749727!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f2dcf904f3467%3A0x524e25e2df007a03!2sMesjid%20Jami&#39;%20Al-Hikmah!5e1!3m2!1sid!2sid!4v1727762618209!5m2!1sid!2sid" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </section>
+            <section id="gallery" class="content">
+                <h2>Gallery Website</h2>
+                <div class="gallery">
+                    <h3>Website Portfolio</h3>
+                    <a href="portfolio.html"><img src="foto1.jpg"></a>
+                    <a href="portfolio2.html"><img src="poto2.jpg"></a>
+                    <a href="portfolio4.html"><img src="foto3.jpg"></a><br>
+                     <h3>Gallery</h3>
+                    <a href="portfolio.html"><img src="https://via.placeholder.com/100"></a>
+                    <a href="portfolio.html"><img src="https://via.placeholder.com/100"></a>  
+                    <a href="portfolio.html"><img src="https://via.placeholder.com/100"></a> 
+                </div>
+            </section>
+            <section id="blog" class="content">
+<img src="blog.jpg"align="center"style="width:300px;height:200px;border-radius:10px;">
+                <h4>Blog Saya</h4>
+                <p>Artikel terbaru akan muncul di sini.</p>
+            </section>
+           <section id="contact" class="content">
+                <div class="login-container">
+                <h2>Pesan</h2>
+                <form>
+                <div class="form-control">
+                <label for="name">Nama:</label>
+                 <input type="text"id="name"name="name"placeholder="Nama"required>
+                  <div class="form-control">
+                <label for="email">email:</label>
+                 <input type="text"id="email"name="email"placeholder="Email"required>
+                  <div class="form-control">
+                 <label for="message">Pesan:</label>
+                 <textarea id="message"name="message"placeholder="message"required></textarea>
+                 </div>
+                 <button type="submit">Kirim</button>
+                </form> 
+<a href="https://www.facebook.com/profile.php?id=61558576457158"><img src="facebok.webp"align="center"border="2"style="width:30px;height:30px;border-radius:50%;object-fit:cover;"></a>
+<a href="https://twitter.com/?lang=id"><img src="twit.webp"align="center"border="2"style="width:30px;height:30px;border-radius:50%;object-fit:cover;"></a>
+<a href="https://www.instagram.com/dzin0982?igsh=YzljYTk1ODg3Zg=="><img src="instra.png"align="center"border="2"style="width:30px;height:30px;border-radius:50%;object-fit:cover;"></a>
+           </section>
+        </main>
+    </div>
+    <footer>
+        <p>&copy;Email:<b><strong><a href="mailto:ihap968@gmail.com">ihap968@gmail.com</a></strong></b><br>
+           &copy;WA:0878-7047-7738</p>
+         
+    </footer>
+</body>
+</html>
